@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"node index.js"
+    "dev": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,5 +26,13 @@
   },
   "engines": {
     "node": ">=12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SKKUD/Team3_toyproject_backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SKKUD/Team3_toyproject_backend/issues"
+  },
+  "homepage": "https://github.com/SKKUD/Team3_toyproject_backend#readme"
 }
