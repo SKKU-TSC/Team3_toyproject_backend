@@ -1,63 +1,25 @@
-const express = require("express");
+const express = require('express');
+
 const router = express.Router();
-const Post = require('../models/Post');
+const {
+  getAllPosts,
+  getOnePost,
+  createPost,
+  updatePost,
+  deletePost,
+} = require('../middlewares/posts');
 
-// Index 
-router.get('/', function(req, res){
-   
-    Post.find({})
-    .then((posts) => {
-      if (!posts.length) return res.status(404).send({ err: 'posts not found' });
-      res.send(`find successfully: ${posts}`);
-    })
-    .catch(err => res.status(500).send(err));
+router.get('/', getAllPosts);
 
-  });
-  
-  // New
-  router.get('/new', function(req, res){
-    res.render('posts/new');
-  });
-  
-  // create
-  router.post('/', function(req, res){
-    Post.create(req.body, function(err, post){
-      if(err) return res.json(err);
-      res.redirect('/posts');
-    });
-  });
-  
-  // show
-  router.get('/:id', function(req, res){
-    Post.findOne({_id:req.params.id}, function(err, post){
-      if(err) return res.json(err);
-      res.render('posts/show', {post:post});
-    });
-  });
+router.get('/:id', getOnePost);
 
-  // edit
-router.get('/:id/edit', function(req, res){
-    Post.findOne({_id:req.params.id}, function(err, post){
-      if(err) return res.json(err);
-      res.render('posts/edit', {post:post});
-    });
-  });
-  
-  // update
-  router.put('/:id', function(req, res){
-    req.body.updatedAt = Date.now(); //2
-    Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
-      if(err) return res.json(err);
-      res.redirect("/posts/"+req.params.id);
-    });
-  });
-  
-  // destroy
-  router.delete('/:id', function(req, res){
-    Post.deleteOne({_id:req.params.id}, function(err){
-      if(err) return res.json(err);
-      res.redirect('/posts');
-    });
-  });
-  
+// create
+router.post('/', createPost);
+
+// update
+router.patch('/:id', updatePost);
+
+// destroy
+router.delete('/:id', deletePost);
+
 module.exports = router;
