@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    container_name: team3-toy-project-backend
+    restart: always
+    build: .
+    ports:
+      - '8000:8000'
+    external_links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
