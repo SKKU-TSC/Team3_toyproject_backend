@@ -22,7 +22,7 @@ app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect('process.env.MONGO_URI')
   .then(() => console.log('Connected to mongodb'))
   .catch(() => console.log('mongodb connection failed'));
 
